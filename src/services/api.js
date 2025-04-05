@@ -1,12 +1,13 @@
 import axios from 'axios';
 
 // Use environment variables to switch between dev and prod URLs
-const API_URL = import.meta.env.NODE_ENV === 'production'
-    ? "https://hrms-579n.onrender.com/api/v1"  // Replace with your actual production API URL
-    : "http://localhost:3000/api/v1";
+const API_URL = import.meta.env.VITE_API_URL || 
+    (import.meta.env.PROD 
+        ? "https://hrms-579n.onrender.com"
+        : "http://localhost:3000");
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: `${API_URL}/api/v1`,
     headers:{
         'Content-Type': 'application/json',
     },
