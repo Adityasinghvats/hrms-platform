@@ -24,7 +24,7 @@ const EmployeeList = ()=>{
                 
                 // With HTTP-only cookies, we don't need to manually add the token
                 // The browser will automatically include cookies in the request
-                const response = await api.get('/employees');
+                const response = await api.get('/employees/');
                 
                 console.log("Employees fetched successfully:", response.data);
                 setEmployees(response.data.data || []);

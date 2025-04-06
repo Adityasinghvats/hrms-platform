@@ -78,7 +78,7 @@ const EmployeeForm = () => {
       if (isEditMode) {
         await api.put(`/employees/${id}`, payload);
       } else {
-        await api.post('/employees', payload);
+        await api.post('/employees/', payload);
       }
       
       navigate('/employees');
