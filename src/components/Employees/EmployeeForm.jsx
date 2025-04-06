@@ -7,6 +7,7 @@ const EmployeeForm = () => {
   const navigate = useNavigate();
   const isEditMode = !!id;
   
+  //default value for role ko employee rkha hain for security I guess
   const [formData, setFormData] = useState({
     name: '',
     email: '',

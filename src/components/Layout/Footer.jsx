@@ -21,7 +21,7 @@ const Footer = () => {
                         <h5 className="uppercase mb-4 font-bold">Quick Links</h5>
                         <ul className="mb-4">
                             <li className="mt-2">
-                                <Link to="/" className="hover:underline">Home</Link>
+                                <Link to="/employees" className="hover:underline">Home</Link>
                             </li>
                             <li className="mt-2">
                                 <Link to="/employees" className="hover:underline">Employees</Link>
@@ -53,13 +53,13 @@ const Footer = () => {
                         <h5 className="uppercase mb-4 font-bold">Contact</h5>
                         <ul className="mb-4">
                             <li className="mt-2">
-                                <span className="block">Email: support@hrms.com</span>
+                                <span className="block">Email: aditya@hrms.com</span>
                             </li>
                             <li className="mt-2">
-                                <span className="block">Phone: +1 (555) 123-4567</span>
+                                <span className="block">Phone: +91 9944559900</span>
                             </li>
                             <li className="mt-2">
-                                <span className="block">Address: 123 HR Street, Suite 456</span>
+                                <span className="block">Address: A5/340, Nadia, Bihar</span>
                             </li>
                         </ul>
                     </div>

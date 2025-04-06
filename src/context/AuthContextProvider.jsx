@@ -11,15 +11,12 @@ const AuthProvider = ({children}) => {
         console.log(userStr)
         if (userStr){
             try {
-                // This line is problematic - you're assigning setCurrentUser's return value to user
                 const user = JSON.parse(userStr);
                 setCurrentUser(user);
                 console.log("User loaded from localStorage:", user);
             } catch (error) {
                 console.error("Error parsing user from localStorage:", error);
-                // localStorage.removeItem('user');
-            }
-            
+            }   
         }
         setLoading(false);
     }, []);
@@ -29,16 +26,12 @@ const AuthProvider = ({children}) => {
         setError(null);
         try {
             console.log("AuthProvider: Attempting login with:", email);
-            
             const response = await api.post('/users/login', { email, password });
             console.log("AuthProvider: Full login response:", response);
-            
-            // Check if we have a valid response
+          
             if (!response.data) {
                 throw new Error('Invalid response from server');
             }
-            
-            // Extract user data based on your API response structure
             let userData;
             if (response.data.data && response.data.data.user) {
                 userData = response.data.data.user;
@@ -57,25 +50,20 @@ const AuthProvider = ({children}) => {
             if (!userData) {
                 throw new Error('No user data found in response');
             }
-            
-            // Add an isAdmin flag based on the roleName or email pattern
-            if ((userData.roleName && userData.roleName.toLowerCase() === 'admin') || 
-                (email.includes('admin'))) {
+
+            if (userData.roleName && userData.roleName.toLowerCase() === 'admin') {
                 userData.isAdmin = true;
                 console.log("Setting isAdmin flag based on roleName or email pattern");
             }
             
-            // Store user data in localStorage
+            // store user localStorage
             localStorage.setItem('user', JSON.stringify(userData));
             
-            // If the API returns tokens in the response body, save them
+            //  returns tokens in the response body, save them
             if (response.data.data && response.data.data.accessToken) {
                 localStorage.setItem('accessToken', response.data.data.accessToken);
             }
-            
-            // Update state
             setCurrentUser(userData);
-            
             return response.data.data || response.data;
         } catch (err) {
             console.error("AuthProvider: Login error", err);
@@ -103,21 +91,15 @@ const AuthProvider = ({children}) => {
     const isAdmin = () => {
         console.log("Checking admin status for user:", currentUser);
         if (!currentUser) return false;
-        
-        // First check for the isAdmin flag we set during login
         if (currentUser.isAdmin === true) {
             console.log("Admin detected by isAdmin flag");
             return true;
         }
-        
-        // Check for roleName property from the response
         if (currentUser.roleName && currentUser.roleName.toLowerCase() === 'admin') {
             console.log("Admin detected by roleName property");
             return true;
         }
-    
-        
-        // More flexible role checking
+        //ai suggestion for more checking
         let hasAdminRole = false;
         
         if (typeof currentUser.role === 'string') {

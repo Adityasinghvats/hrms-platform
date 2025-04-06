@@ -35,8 +35,6 @@ const Header = () => {
                         <Link to="/" className="px-3 py-2 rounded hover:bg-blue-700 text-xl font-bold">
                             HRMS SYSTEM
                         </Link>
-                        
-                        
                         <div className="md:hidden">
                             <button 
                                 onClick={toggleMenu}
@@ -51,8 +49,6 @@ const Header = () => {
                                 </svg>
                             </button>
                         </div>
-                        
-    
                         <nav className="hidden md:flex items-center">
                             <Link to='/employees' className="px-3 py-2 rounded hover:bg-blue-700">
                                 Employees
@@ -87,7 +83,7 @@ const Header = () => {
                             </div>
                         </nav>
                     </div>
-                    
+                    {/* ai code */}
                     {/* Mobile navigation */}
                     {isMenuOpen && (
                         <nav className="md:hidden pt-4 pb-2 border-t border-blue-500 mt-2">

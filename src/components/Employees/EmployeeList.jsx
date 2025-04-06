@@ -62,76 +62,116 @@ const EmployeeList = ()=>{
     }
     
     if (loading) {
-        return <div className="text-center py-10">Loading employees...</div>;
+        return (
+            <div className="flex justify-center items-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                <span className="ml-3 text-lg font-medium text-gray-700">Loading employees...</span>
+            </div>
+        );
     }
     
     if (error) {
-        return <div className="text-center py-10 text-red-600">{error}</div>;
+        return (
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 my-8 rounded shadow">
+                <div className="flex">
+                    <div className="flex-shrink-0">
+                        <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                        </svg>
+                    </div>
+                    <div className="ml-3">
+                        <p className="text-red-700 font-medium">{error}</p>
+                    </div>
+                </div>
+            </div>
+        );
     }
     
     return(
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Employee Directory</h1>
+                <h1 className="text-3xl font-bold text-gray-800">Employee Directory</h1>
                 {isAdmin && isAdmin() && (
                     <Link
                     to="/employees/new"
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out flex items-center"
                     >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
+                    </svg>
                     Add Employee
                     </Link>
                 )}
             </div>
             
             {employees.length === 0 ? (
-                <p className="text-center py-10">No employees found.</p>
+                <div className="bg-white rounded-lg shadow-md p-8 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <p className="text-xl text-gray-600">No employees found.</p>
+                </div>
             ):(
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white border border-gray-200">
-                        <thead>
-                            <tr>
-                                <th className="py-2 px-4 border-b">Name</th>
-                                <th className="py-2 px-4 border-b">Email</th>
-                                <th className="py-2 px-4 border-b">Department</th>
-                                <th className="py-2 px-4 border-b">Position</th>
-                                <th className="py-2 px-4 border-b">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {employees.map((employee) => (
-                                <tr key={employee._id} className="hover:bg-gray-50">
-                                    <td className="py-2 px-4 border-b">{employee.name}</td>
-                                    <td className="py-2 px-4 border-b">{employee.email}</td>
-                                    <td className="py-2 px-4 border-b">{employee.department}</td>
-                                    <td className="py-2 px-4 border-b">{employee.position}</td>
-                                    <td className="py-2 px-4 border-b flex space-x-4">
-                                        <Link
-                                        to={`/employees/${employee._id}`}
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-                                        >
-                                        View
-                                        </Link>
-                                        {isAdmin && isAdmin() && (
-                                            <>
-                                            <Link
-                                            to={`/employees/${employee._id}/edit`}
-                                            className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded"
-                                            >
-                                            Edit
-                                            </Link>
-                                            <button
-                                            onClick={()=> handleDelete(employee._id)}
-                                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
-                                            >
-                                                Delete
-                                            </button>
-                                            </>
-                                        )}
-                                    </td>
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Department</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                                {employees.map((employee) => (
+                                    <tr key={employee._id} className="hover:bg-gray-50 transition duration-150">
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm font-medium text-gray-900">{employee.name}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm text-gray-500">{employee.email}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                {employee.department}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {employee.position}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <div className="flex space-x-2">
+                                                <Link
+                                                to={`/employees/${employee._id}`}
+                                                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-3 rounded-md transition duration-150"
+                                                >
+                                                    View
+                                                </Link>
+                                                {isAdmin && isAdmin() && (
+                                                    <>
+                                                    <Link
+                                                    to={`/employees/${employee._id}/edit`}
+                                                    className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-1 px-3 rounded-md transition duration-150"
+                                                    >
+                                                        Edit
+                                                    </Link>
+                                                    <button
+                                                    onClick={()=> handleDelete(employee._id)}
+                                                    className="bg-red-600 hover:bg-red-700 text-white font-medium py-1 px-3 rounded-md transition duration-150"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                    </>
+                                                )}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )}
         </div>

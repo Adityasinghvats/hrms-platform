@@ -63,7 +63,6 @@ const EmployeeSearch = () => {
         {searched && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Search Results</h2>
-            
             {results.length === 0 ? (
               <p className="text-center py-4">No employees found matching your search.</p>
             ) : (
@@ -88,7 +87,7 @@ const EmployeeSearch = () => {
                         <td className="py-2 px-4 border-b">
                           <Link 
                             to={`/employees/${employee._id}`}
-                            className="text-blue-500 hover:text-blue-700"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
                           >
                             View Details
                           </Link>
