@@ -95,10 +95,11 @@ api.interceptors.request.use(
         console.log("Token retrieved from localStorage:", token ? "Found (length: " + token.length + ")" : "Not found");
         
         if(token){
-            // Make sure the token is properly formatted
-            const formattedToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-            console.log("Adding token to request:", formattedToken.substring(0, 20) + "...");
-            config.headers['Authorization'] = formattedToken;
+            // Your backend expects "Bearer " with a space after it
+            // But your verification logic removes "Bearer" without the space
+            // Let's fix the format to match what your backend expects
+            config.headers['Authorization'] = `Bearer ${token}`;
+            console.log("Adding token to request:", `Bearer ${token.substring(0, 20)}...`);
         } else {
             console.log("No token found for request to:", config.url);
         }
