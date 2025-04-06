@@ -21,6 +21,9 @@ function App() {
         <Header/>
         <main className="container mx-auto py-4">
           <Routes>
+            <Route path='/' 
+            element={<Navigate to="/employees" replace />} 
+            />
             <Route path='/login' element={<Login/>}/>
 
             <Route
@@ -49,6 +52,13 @@ function App() {
               </ProtectedRoute>
             }
             />
+            <Route
+            path="/employees/export" 
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <ExportEmployees />
+              </ProtectedRoute>
+            }/>
 
             <Route
             path="/employees/:id" 
@@ -67,13 +77,7 @@ function App() {
               </ProtectedRoute>
             } 
             />
-            <Route
-            path="/employees/export" 
-            element={
-              <ProtectedRoute adminOnly={true}>
-                <ExportEmployees />
-              </ProtectedRoute>
-            }/>
+            
             <Route 
             path="*" 
             element={<Navigate to="/employees" replace />} 
