@@ -1,3 +1,13 @@
+# Admin-Login
+```bash
+aditya@gmail.com
+aditya@01
+```
+# User-Login
+```bash
+aarav@gmail.com
+aarava@01
+```
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
