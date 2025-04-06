@@ -14,7 +14,7 @@ const EmployeeForm = () => {
     phoneNo: '',
     position: '',
     department: '',
-    role: ''
+    role: 'employee'
   });
   
   const [loading, setLoading] = useState(isEditMode);
@@ -36,7 +36,7 @@ const EmployeeForm = () => {
           phoneNo: employee.phoneNo || '',
           position: employee.position || '',
           department: employee.department || '',
-          role: employee.role || '' 
+          role: employee.role || 'employee' 
         });
         
         setError(null);
