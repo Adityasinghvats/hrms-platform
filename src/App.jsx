@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import AuthProvider from './context/authcontextprovider.jsx';
+import AuthProvider from './context/AuthContextProvider.jsx';
 
 //components
 import Login from './components/Auth/Login';
@@ -8,7 +8,7 @@ import EmployeeList from './components/Employees/EmployeeList';
 import EmployeeDetails from './components/Employees/EmployeeDetails';
 import EmployeeForm from './components/Employees/EmployeeForm';
 import EmployeeSearch from './components/Employees/EmployeeSearch';
-import Header from './components/Layout/header.jsx';
+import Header from './components/Layout/Header.jsx';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Footer from './components/Layout/Footer.jsx';
 import ExportEmployees from './components/Employees/ExportEmployees.jsx';
